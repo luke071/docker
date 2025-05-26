@@ -11,8 +11,16 @@ docker create --tty --interactive --name rockylinux-lab rockylinux:9.3
 ## Launching containers  
 docker start rockylinux-lab  
 docker start almalinux-lab  
-## Container shell entry and exit  
-docker exec -it almalinux-lab /bin/bash  
-exit  
+## How to check the IP addresses of containers in the default bridge network?
+docker network inspect bridge
+
+    almalinux-lab - 172.17.0.2/16  
+    rockylinux-lab  - 172.17.0.3/16  
+## Container shell entry and checking the network connection between containers  
 docker exec -it rockylinux-lab /bin/bash  
-exit  
+apt-get install iputils-ping -y  
+ping 172.17.0.2  
+
+![alt text](./assets/network1.png)  
+
+
